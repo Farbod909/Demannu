@@ -16,18 +16,22 @@ clock = pygame.time.Clock()
 game_view = GameView(game_display)
 human = Human(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 10, 40)
 
+
+def handle_key_down(key):
+    if key == pygame.K_RIGHT:
+        human.change_direction_to_right()
+    elif key == pygame.K_LEFT:
+        human.change_direction_to_left()
+    elif key == pygame.K_UP:
+        human.jump()
+
 game_exit = False
 while not game_exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_exit = True
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                human.change_direction_to_right()
-            elif event.key == pygame.K_LEFT:
-                human.change_direction_to_left()
-            elif event.key == pygame.K_UP:
-                human.jump()
+            handle_key_down(event.key)
         elif event.type == pygame.KEYUP:
             if event.key in (pygame.K_RIGHT, pygame.K_LEFT):
                 human.stop_walking()
