@@ -1,9 +1,9 @@
 import pygame
 from Human import Human
 from views import GameView
+import colors
 
 pygame.init()
-
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -38,7 +38,7 @@ while not game_exit:
 
     human.apply_physics()
 
-    game_view.fill((255,255,255))
+    game_view.fill(colors.WHITE)
     game_view.render_entity(human)
 
     pygame.display.update()

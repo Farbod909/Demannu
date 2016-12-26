@@ -1,5 +1,6 @@
 import pygame
 from models import Entity
+import colors
 
 
 class GameView:
@@ -12,6 +13,6 @@ class GameView:
 
     def render_entity(self, entity: Entity):
         pygame.draw.rect(
-            self.game_display, (0, 0, 0),
+            self.game_display, colors.BLACK,
             [entity.pos_x, entity.pos_y, entity.width, entity.height])
 
