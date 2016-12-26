@@ -13,7 +13,7 @@ class Entity:
         self.height = height
 
 
-class SolidEntity(Entity):
+class GravityEntity(Entity):
 
     def __init__(
             self,

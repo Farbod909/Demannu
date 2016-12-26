@@ -14,7 +14,10 @@ pygame.display.set_caption('Demannu')
 clock = pygame.time.Clock()
 
 game_view = GameView(game_display)
-human = Human(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 10, 40)
+human = Human(
+    initial_x=DISPLAY_WIDTH/2,
+    initial_y=DISPLAY_HEIGHT/2,
+    width=10, height=40)
 
 
 def handle_key_down(key):

@@ -1,11 +1,11 @@
-from models import SolidEntity
+from models import GravityEntity
 
 
 WALKING_SPEED = 5
 JUMP_SPEED = 6
 
 
-class Human(SolidEntity):
+class Human(GravityEntity):
 
     def __init__(
             self,
