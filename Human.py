@@ -1,4 +1,4 @@
-from SolidEntity import SolidEntity
+from models import SolidEntity
 
 
 WALKING_SPEED = 5
@@ -9,13 +9,9 @@ class Human(SolidEntity):
 
     def __init__(
             self,
-            width: int, height: int,
-            initial_x: int, initial_y: int):
-        super().__init__()
-        self.width = width
-        self.height = height
-        self.pos_x = initial_x - (width / 2)
-        self.pos_y = initial_y - (height / 2)
+            initial_x: int, initial_y: int,
+            width: int, height: int):
+        super().__init__(initial_x, initial_y, width, height)
         self.speed_x = 0
         self.speed_y = 0
 

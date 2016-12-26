@@ -15,7 +15,7 @@ game_display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption('Demannu')
 
 clock = pygame.time.Clock()
-human = Human(10, 40, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2)
+human = Human(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 10, 40)
 
 game_exit = False
 while not game_exit:
