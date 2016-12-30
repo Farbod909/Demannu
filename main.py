@@ -1,3 +1,16 @@
+"""
+Demannu
+
+A simple platformer with a human and a companion robot
+By Farbod Rafezy
+
+https://github.com/Farbod909/Demannu
+
+MIT License
+
+"""
+
+
 import pygame
 from Human import Human
 from views import GameView
@@ -31,7 +44,8 @@ def handle_key_down(key):
 game_exit = False
 while not game_exit:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if (event.type == pygame.QUIT or
+                event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
             game_exit = True
         elif event.type == pygame.KEYDOWN:
             handle_key_down(event.key)
