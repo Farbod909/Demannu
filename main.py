@@ -12,7 +12,7 @@ MIT License
 
 
 import pygame
-from Human import Human
+from models import Human
 import colors
 
 pygame.init()
