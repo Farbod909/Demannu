@@ -3,7 +3,7 @@ import pygame
 
 
 def load_png(name):
-    """ Load image and return image object"""
+    """Load image and return image object"""
     fullname = os.path.join('resources', name)
     try:
         image = pygame.image.load(fullname)

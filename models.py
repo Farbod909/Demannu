@@ -2,12 +2,11 @@ import pygame
 from resource_manager import load_png
 
 
-GRAVITY_ACCELERATION = 0.6
-WALK_SPEED = 5
-JUMP_SPEED = 6
-
-
 class Human(pygame.sprite.Sprite):
+
+    GRAVITY_ACCELERATION = 0.6
+    WALK_SPEED = 5
+    JUMP_SPEED = 6
 
     def __init__(self, initial_x, initial_y):
         pygame.sprite.Sprite.__init__(self)
@@ -18,10 +17,10 @@ class Human(pygame.sprite.Sprite):
         self.rect.center = (initial_x, initial_y)
 
     def move_right(self):
-        self.vel_x = WALK_SPEED
+        self.vel_x = Human.WALK_SPEED
 
     def move_left(self):
-        self.vel_x = -WALK_SPEED
+        self.vel_x = -Human.WALK_SPEED
 
     def update(self):
         self._apply_gravity()
@@ -30,10 +29,10 @@ class Human(pygame.sprite.Sprite):
         pygame.event.pump()
 
     def _apply_gravity(self):
-        self.vel_y += GRAVITY_ACCELERATION
+        self.vel_y += Human.GRAVITY_ACCELERATION
 
     def jump(self):
-        self.vel_y = -JUMP_SPEED
+        self.vel_y = -Human.JUMP_SPEED
 
     def stop_walking(self):
         self.vel_x = 0
