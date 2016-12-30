@@ -12,19 +12,20 @@ MIT License
 
 import pygame
 from models import Human
-import colors
+from resource_manager import load_png
 
 
-DISPLAY_WIDTH = 800
-DISPLAY_HEIGHT = 600
+DISPLAY_WIDTH = 640
+DISPLAY_HEIGHT = 480
 
 pygame.init()
 game_display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption('Demannu')
 
+city_bg = load_png('cityBackground.png')[0]
 background = pygame.Surface(game_display.get_size())
 background = background.convert()
-background.fill(colors.WHITE)
+background.blit(city_bg, (0, 0))
 
 game_display.blit(background, (0, 0))
 pygame.display.flip()
