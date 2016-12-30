@@ -10,16 +10,15 @@ MIT License
 
 """
 
-
 import pygame
 from models import Human
 import colors
 
-pygame.init()
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
 
+pygame.init()
 game_display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption('Demannu')
 
@@ -33,16 +32,6 @@ pygame.display.flip()
 human = Human(initial_x=DISPLAY_WIDTH/2, initial_y=DISPLAY_HEIGHT/2)
 human_sprite = pygame.sprite.RenderPlain(human)
 
-
-def handle_key_down(key):
-    if key == pygame.K_RIGHT:
-        human.move_right()
-    elif key == pygame.K_LEFT:
-        human.move_left()
-    elif key == pygame.K_UP:
-        human.jump()
-
-
 clock = pygame.time.Clock()
 
 game_exit = False
@@ -54,7 +43,12 @@ while not game_exit:
                 event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
             game_exit = True
         elif event.type == pygame.KEYDOWN:
-            handle_key_down(event.key)
+            if event.key == pygame.K_RIGHT:
+                human.move_right()
+            elif event.key == pygame.K_LEFT:
+                human.move_left()
+            elif event.key == pygame.K_UP:
+                human.jump()
         elif event.type == pygame.KEYUP:
             if event.key in (pygame.K_RIGHT, pygame.K_LEFT):
                 human.stop_walking()
