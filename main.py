@@ -13,7 +13,6 @@ MIT License
 
 import pygame
 from Human import Human
-from views import GameView
 import colors
 
 pygame.init()
@@ -24,25 +23,32 @@ DISPLAY_HEIGHT = 600
 game_display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption('Demannu')
 
-clock = pygame.time.Clock()
+background = pygame.Surface(game_display.get_size())
+background = background.convert()
+background.fill(colors.WHITE)
 
-game_view = GameView(game_display)
-human = Human(
-    initial_x=DISPLAY_WIDTH/2,
-    initial_y=DISPLAY_HEIGHT/2,
-    width=10, height=40)
+game_display.blit(background, (0, 0))
+pygame.display.flip()
+
+human = Human(initial_x=DISPLAY_WIDTH/2, initial_y=DISPLAY_HEIGHT/2)
+human_sprite = pygame.sprite.RenderPlain(human)
 
 
 def handle_key_down(key):
     if key == pygame.K_RIGHT:
-        human.change_direction_to_right()
+        human.move_right()
     elif key == pygame.K_LEFT:
-        human.change_direction_to_left()
+        human.move_left()
     elif key == pygame.K_UP:
         human.jump()
 
+
+clock = pygame.time.Clock()
+
 game_exit = False
 while not game_exit:
+    clock.tick(60)
+
     for event in pygame.event.get():
         if (event.type == pygame.QUIT or
                 event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
@@ -53,13 +59,14 @@ while not game_exit:
             if event.key in (pygame.K_RIGHT, pygame.K_LEFT):
                 human.stop_walking()
 
-    human.apply_physics()
+    dirty_rects = []
 
-    game_view.fill(colors.WHITE)
-    game_view.render_entity(human)
-
-    pygame.display.update()
-    clock.tick(60)
+    game_display.blit(background, human.rect, human.rect)
+    dirty_rects.append(human.rect)
+    human_sprite.update()
+    human_sprite.draw(game_display)
+    dirty_rects.append(human.rect)
+    pygame.display.update(dirty_rects)
 
 pygame.quit()
 quit()

@@ -1,39 +1,39 @@
-from models import GravityEntity
+import pygame
+from resource_manager import load_png
 
 
-WALKING_SPEED = 5
+GRAVITY_ACCELERATION = 0.6
+WALK_SPEED = 5
 JUMP_SPEED = 6
 
 
-class Human(GravityEntity):
+class Human(pygame.sprite.Sprite):
 
-    def __init__(
-            self,
-            initial_x: int, initial_y: int,
-            width: int, height: int):
-        super().__init__(initial_x, initial_y, width, height)
-        self.speed_x = 0
-        self.speed_y = 0
+    def __init__(self, initial_x, initial_y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_png('charRightStill.png')
+        self.area = pygame.display.get_surface().get_rect()
+        self.vel_x = 0
+        self.vel_y = 0
+        self.rect.center = (initial_x, initial_y)
 
-    def change_direction_to_right(self):
-        self.speed_x = WALKING_SPEED
+    def move_right(self):
+        self.vel_x = WALK_SPEED
 
-    def change_direction_to_left(self):
-        self.speed_x = -WALKING_SPEED
+    def move_left(self):
+        self.vel_x = -WALK_SPEED
 
-    def advance_position(self):
-        self.pos_x += self.speed_x
-        self.pos_y += self.speed_y
+    def update(self):
+        self._apply_gravity()
+        new_pos = self.rect.move(self.vel_x, self.vel_y)
+        self.rect = new_pos
+        pygame.event.pump()
 
-    def apply_gravity(self):
-        self.speed_y += self.accel_y
-
-    def apply_physics(self):
-        self.apply_gravity()
-        self.advance_position()
+    def _apply_gravity(self):
+        self.vel_y += GRAVITY_ACCELERATION
 
     def jump(self):
-        self.speed_y = -JUMP_SPEED
+        self.vel_y = -JUMP_SPEED
 
     def stop_walking(self):
-        self.speed_x = 0
+        self.vel_x = 0
