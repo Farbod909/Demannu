@@ -23,6 +23,7 @@ game_display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption('Demannu')
 
 city_bg = load_png('cityBackground.png')[0]
+city_bg = pygame.transform.scale(city_bg, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 background = pygame.Surface(game_display.get_size())
 background = background.convert()
 background.blit(city_bg, (0, 0))
